@@ -1,0 +1,160 @@
+{
+  "duration_s": 814.84,
+  "overall_decision": "BLOCKED",
+  "usage": {
+    "llm_calls": 84,
+    "llm_errors": 0,
+    "input_tokens": 505196,
+    "output_tokens": 40916,
+    "token_usage_reported": true,
+    "tool_calls": 195,
+    "tool_errors": 0
+  },
+  "jira_requests": 155,
+  "per_requirement": {
+    "REQ-01": {
+      "decision": "PASS",
+      "status": "ok",
+      "duration_s": 165.66,
+      "llm_calls": 6,
+      "llm_errors": 0,
+      "input_tokens": 29373,
+      "output_tokens": 2624,
+      "token_usage_reported": true,
+      "tool_calls": 15,
+      "tool_errors": 0
+    },
+    "REQ-02": {
+      "decision": "FAIL",
+      "status": "ok",
+      "duration_s": 109.94,
+      "llm_calls": 5,
+      "llm_errors": 0,
+      "input_tokens": 18008,
+      "output_tokens": 1419,
+      "token_usage_reported": true,
+      "tool_calls": 10,
+      "tool_errors": 0
+    },
+    "REQ-03": {
+      "decision": "INSUFFICIENT_EVIDENCE",
+      "status": "ok",
+      "duration_s": 547.63,
+      "llm_calls": 13,
+      "llm_errors": 0,
+      "input_tokens": 129158,
+      "output_tokens": 10985,
+      "token_usage_reported": true,
+      "tool_calls": 33,
+      "tool_errors": 0
+    },
+    "REQ-04": {
+      "decision": "PASS",
+      "status": "ok",
+      "duration_s": 106.82,
+      "llm_calls": 4,
+      "llm_errors": 0,
+      "input_tokens": 16438,
+      "output_tokens": 2245,
+      "token_usage_reported": true,
+      "tool_calls": 13,
+      "tool_errors": 0
+    },
+    "REQ-05": {
+      "decision": "FAIL",
+      "status": "ok",
+      "duration_s": 40.44,
+      "llm_calls": 3,
+      "llm_errors": 0,
+      "input_tokens": 9084,
+      "output_tokens": 1191,
+      "token_usage_reported": true,
+      "tool_calls": 7,
+      "tool_errors": 0
+    },
+    "REQ-06": {
+      "decision": "INSUFFICIENT_EVIDENCE",
+      "status": "ok",
+      "duration_s": 164.95,
+      "llm_calls": 6,
+      "llm_errors": 0,
+      "input_tokens": 24414,
+      "output_tokens": 4366,
+      "token_usage_reported": true,
+      "tool_calls": 11,
+      "tool_errors": 0
+    },
+    "REQ-07": {
+      "decision": "PASS",
+      "status": "ok",
+      "duration_s": 37.98,
+      "llm_calls": 3,
+      "llm_errors": 0,
+      "input_tokens": 9180,
+      "output_tokens": 1027,
+      "token_usage_reported": true,
+      "tool_calls": 7,
+      "tool_errors": 0
+    },
+    "REQ-08": {
+      "decision": "FAIL",
+      "status": "ok",
+      "duration_s": 80.54,
+      "llm_calls": 5,
+      "llm_errors": 0,
+      "input_tokens": 17226,
+      "output_tokens": 1388,
+      "token_usage_reported": true,
+      "tool_calls": 9,
+      "tool_errors": 0
+    },
+    "REQ-09": {
+      "decision": "INSUFFICIENT_EVIDENCE",
+      "status": "ok",
+      "duration_s": 77.31,
+      "llm_calls": 4,
+      "llm_errors": 0,
+      "input_tokens": 13615,
+      "output_tokens": 1855,
+      "token_usage_reported": true,
+      "tool_calls": 9,
+      "tool_errors": 0
+    },
+    "REQ-10": {
+      "decision": "PASS",
+      "status": "ok",
+      "duration_s": 136.44,
+      "llm_calls": 8,
+      "llm_errors": 0,
+      "input_tokens": 51837,
+      "output_tokens": 3670,
+      "token_usage_reported": true,
+      "tool_calls": 21,
+      "tool_errors": 0
+    },
+    "REQ-11": {
+      "decision": "INSUFFICIENT_EVIDENCE",
+      "status": "ok",
+      "duration_s": 489.91,
+      "llm_calls": 15,
+      "llm_errors": 0,
+      "input_tokens": 120739,
+      "output_tokens": 5944,
+      "token_usage_reported": true,
+      "tool_calls": 30,
+      "tool_errors": 0
+    },
+    "REQ-12": {
+      "decision": "FAIL",
+      "status": "ok",
+      "duration_s": 108.81,
+      "llm_calls": 7,
+      "llm_errors": 0,
+      "input_tokens": 47659,
+      "output_tokens": 2871,
+      "token_usage_reported": true,
+      "tool_calls": 14,
+      "tool_errors": 0
+    }
+  }
+}
