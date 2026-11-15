@@ -2,8 +2,6 @@
 
 A tool-using AI agent that decides whether the mandatory requirements of a software release are satisfied by evidence recorded in Jira, and writes one evidence-backed release-readiness report.
 
-Built for The Yellow Network AI Engineer assessment. Target: release **R2.4** of `atlas-assistant` (commit `b7a91f2`, prompt `p7`, production).
-
 ## Result
 
 Submitted report: [runs/20261115-095444/report.md](runs/20261115-095444/report.md)
