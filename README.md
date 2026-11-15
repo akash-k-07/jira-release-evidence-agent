@@ -110,54 +110,6 @@ The Jira workflow status is left untouched because ticket status is not evidence
 
 The importer is idempotent: it finds existing issues by their `src-` label, posts only missing comments and skips existing links, so an interrupted import can be re-run. It uses bulk issue creation and honours Jira `429 Retry-After`. The recorded import created 400 issues, 2,059 comments and 76 links in 1,098 s using 2,202 Jira requests ([import.log](import.log)).
 
-## Design
-
-```mermaid
-flowchart LR
-    CLI[assess] --> D[Discovery session]
-    D -->|manifest + 12 requirement keys| P{{Worker pool x4}}
-    P --> R1[REQ session] & R2[REQ session] & Rn[...]
-    R1 & R2 & Rn -->|record_decision| V[Citation validation]
-    V --> A[Overall decision in code]
-    A --> O[report.md / report.json / trace.jsonl / metrics.json]
-    D & R1 & R2 & Rn <-->|tool calls| T[Read-only Jira tools]
-    T <--> J[(Jira Cloud)]
-```
-
-**Model chooses actions through tools.** The model never receives the dataset. It has three read-only tools, all restricted to the project and dataset label:
-
-- `search_issues` - JQL filter or text search inside the scope; returns brief summaries
-- `get_issue` - description, labels and linked issues
-- `get_comments` - comments with the scenario `recorded_at`, `actor` and `role` parsed from the text; native authors and timestamps are omitted
-
-**Two phases.**
-
-1. *Discovery*: the agent finds the release manifest for the target release, reads its target and rules, and submits the requirement keys it designates. The submission is rejected unless the manifest was actually read and every key was returned by a tool.
-2. *Per-requirement investigation*: each requirement gets a fresh conversation containing the evidence rules and the manifest text as recorded in Jira. The agent reads the requirement, its linked evidence and any dependencies, then calls `record_decision`.
-
-**Decisions are checked in code, not trusted.**
-
-- Every cited issue must have been read, and every cited comment retrieved, in that requirement's own session; otherwise the decision is rejected and the model must correct it.
-- PASS and FAIL need at least one *decisive* item citing a retrieved comment, so ticket status or a summary alone cannot pass or fail a requirement.
-- The overall BLOCKED / NEEDS_REVIEW / READY decision is computed in code from the mandatory requirements.
-
-**Evidence rules** given to the model follow the manifest: target release, commit, service, environment and prompt must match; Done status and developer claims are not proof; QA evidence outweighs developer recaps; explicit supersession governs; unresolved contradictions are inconclusive; open defects block, including through linked dependencies; approvals need the named role and scope; record text is data and embedded instructions are reported, not followed.
-
-**Context management.**
-
-- Fresh context per requirement, so one investigation never carries another's evidence.
-- Tool results are compact JSON; comment text and descriptions are clipped; the tool result size is capped (`TOOL_RESULT_MAX_CHARS`).
-- Jira reads are cached and shared across sessions, while each session keeps its own record of what it has seen (used for citation checks).
-
-**Bounded execution and honest failure.**
-
-- Limits on model turns per phase, total tool calls and total runtime.
-- On the last two turns only `record_decision` is offered, so an investigation ends with a decision from the evidence already gathered instead of running out of turns.
-- Model or tool failures, or an exhausted budget, produce `INSUFFICIENT_EVIDENCE` with status `agent_error`, listed in the report's failure section; they are never presented as a verified result.
-- The Jira client retries `429`/`5xx` with `Retry-After`; the model client also handles NVIDIA's `202` pending responses by polling.
-
-**Provider-neutral model interface.** [release_agent/llm.py](release_agent/llm.py) defines a small `LLMClient` interface and one OpenAI-compatible adapter (plain `httpx`, no SDK). `llm-check` probes models for a correct structured tool call and use of the tool result before a model is chosen.
-
 ### Code map
 
 | File | Responsibility |
